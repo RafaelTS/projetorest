@@ -1,5 +1,11 @@
 package br.sc.rafael.test;
 
-public class ClasseTeset {
+import org.junit.Test;
 
+public class ClasseTeset {
+	
+	@Test
+	public void metodoPraVerSeGitBombaSemSenha() {
+		
+	}
 }
