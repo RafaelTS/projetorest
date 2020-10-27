@@ -1,7 +1,10 @@
 package br.sc.rafael.tests;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +17,7 @@ import org.junit.runners.MethodSorters;
 import br.sc.rafael.rest.core.BaseTest;
 import br.sc.rafael.rest.utils.DateUtils;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.specification.FilterableRequestSpecification;
 
 
@@ -28,14 +32,17 @@ public class BarrigaTest extends BaseTest {
 	@BeforeClass
 	public static void login() {
 		Map<String, String> login = new HashMap<String, String>();
-		login.put("email", "eduardo@gmail.com");
-		login.put("senha", "123456");
+//		login.put("email", "rafaeltorress@gmail.com");
+//		login.put("senha", "123");
+		login.put("email", "kelly.rabelo@gmail.com");
+		login.put("senha", "momota01");
 		
 		String TOKEN = given()
-			.body(login)
+			.contentType(ContentType.JSON)
+			.body(login)			
 		.when()
 		
-			.post("/signin")
+			.post("/login")
 		.then()
 			.statusCode(200)
 			.extract().path("token");
@@ -47,8 +54,8 @@ public class BarrigaTest extends BaseTest {
 	@Test
 	public void t02_deveIncluirContaComSucesso() {
 		CONTA_ID = given()
-			.log().all()
-			.body("{ \"nome\": \"conta qualquer\"}")
+			.contentType(ContentType.JSON)
+			.body("{ \"nome\": \"conta qualquer12341\"}")
 			
 		.when()
 			.post("/contas")
