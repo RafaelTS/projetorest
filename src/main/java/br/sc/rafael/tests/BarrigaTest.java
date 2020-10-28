@@ -38,11 +38,9 @@ public class BarrigaTest extends BaseTest {
 		login.put("senha", "momota01");
 		
 		String TOKEN = given()
-			.contentType(ContentType.JSON)
 			.body(login)			
 		.when()
-		
-			.post("/login")
+			.post("/signin")
 		.then()
 			.statusCode(200)
 			.extract().path("token");
