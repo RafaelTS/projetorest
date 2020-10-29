@@ -23,7 +23,7 @@ public class BaseTest implements Constantes {
 		resBuilder.expectResponseTime(Matchers.lessThan(MAX_TIMEOUT));
 		RestAssured.responseSpecification = resBuilder.build();
 		
-		//RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 		
 	}
 

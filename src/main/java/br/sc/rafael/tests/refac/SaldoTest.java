@@ -12,7 +12,7 @@ import org.junit.Test;
 import br.sc.rafael.rest.core.BaseTest;
 import io.restassured.RestAssured;
 
-public class ContasTest extends BaseTest {
+public class SaldoTest extends BaseTest {
 	
 	@BeforeClass
 	public static void login() {
@@ -36,41 +36,16 @@ public class ContasTest extends BaseTest {
 	}
 	
 	@Test
-	public void deveIncluirContaComSucesso() {
-		given()
-			.body("{ \"nome\": \"Conta inserida\"}")
-		.when()
-			.post("/contas")
-		.then()
-			.statusCode(201)
-		;		
-	}
-	
-	@Test
-	public void deveAlterarContaComSucesso() {
-		Integer CONTA_ID = getIdContaPeloNome("Conta para alterar");
+	public void deveCalcularSaldoConta() {
+		Integer CONTA_ID = getIdContaPeloNome("Conta para saldo");
 		
 		given()
-			.body("{ \"nome\": \"Conta alterada\"}")
-			.pathParam("id", CONTA_ID)
 		.when()
-			.put("/contas/{id}")
+			.get("/saldo")
 		.then()
 			.statusCode(200)
-			.body("nome", is("Conta alterada"))
-		;
-	}
-	
-
-	@Test
-	public void naoDeveInserirContaComMesmoNome() {
-		given()
-			.body("{ \"nome\": \"Conta mesmo nome\"}")
-		.when()
-			.post("/contas")
-		.then()
-			.statusCode(400)
-			.body("error", is("Já existe uma conta com esse nome!"))
+			.body("find{it.conta_id == "+ CONTA_ID +"}.saldo", is("534.00"))
+			
 		;
 	}
 	

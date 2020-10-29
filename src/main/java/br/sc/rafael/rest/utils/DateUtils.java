@@ -14,7 +14,7 @@ public class DateUtils {
 	}
 	//formatar em String
 	public static String getDataFormatada(Date data) {
-		DateFormat format = new SimpleDateFormat("dd/mm/aaaa");
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		return format.format(data);
 	}
 }
