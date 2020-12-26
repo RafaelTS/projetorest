@@ -1,41 +1,19 @@
 package br.sc.rafael.tests.refac;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import br.sc.rafael.rest.core.BaseTest;
+import br.sc.rafael.rest.utils.BarrigaUtils;
 import br.sc.rafael.rest.utils.DateUtils;
 import br.sc.rafael.tests.Movimentacao;
-import io.restassured.RestAssured;
 
 public class MovimentacoesTest extends BaseTest {
-	
-	@BeforeClass
-	public static void login() {
-		Map<String, String> login = new HashMap<String, String>();
-		login.put("email", "rafaeltorress@gmail.com");
-		login.put("senha", "123");
-		
-		String TOKEN = given()
-			.body(login)
-		.when()
-			.post("/signin")
-		.then()
-			.statusCode(200)
-			.extract().path("token");
-			;
-			
-		RestAssured.requestSpecification.header("Authorization", "JWT " + TOKEN);
-		
-		RestAssured.get("/reset").then().statusCode(200);
-		
-	}
 	
 	@Test
 	public void deveInserirMovimentacaoComSucesso() {
@@ -93,7 +71,7 @@ public class MovimentacoesTest extends BaseTest {
 	
 	@Test
 	public void naoDeveRemoverContaComMovimentacao() {
-		Integer CONTA_ID = getIdContaPeloNome("Conta com movimentacao");
+		Integer CONTA_ID = BarrigaUtils.getIdContaPeloNome("Conta com movimentacao");
 		
 		given()
 			.pathParam("id", CONTA_ID)
@@ -107,7 +85,7 @@ public class MovimentacoesTest extends BaseTest {
 	
 	@Test
 	public void deveDeletarMovimentacao() {
-		Integer MOV_ID = getIdMovimentacaoPeloNome("Movimentacao para exclusão");
+		Integer MOV_ID = BarrigaUtils.getIdMovimentacaoPeloNome("Movimentacao para exclusão");
 		
 		given()
 			.pathParam("id", MOV_ID)
@@ -118,17 +96,9 @@ public class MovimentacoesTest extends BaseTest {
 		;
 	}
 	
-	public Integer getIdContaPeloNome(String nome) {
-		return RestAssured.get("/contas?nome="+nome).then().extract().path("id[0]");
-	}
-	
-	public Integer getIdMovimentacaoPeloNome(String nome) {
-		return RestAssured.get("/transacoes?nome="+nome).then().extract().path("id[0]");
-	}
-	
 	private Movimentacao getMovimentacaoValida() {
 		Movimentacao mov = new Movimentacao();
-		mov.setConta_id(getIdContaPeloNome("Conta para movimentacoes")); 
+		mov.setConta_id(BarrigaUtils.getIdContaPeloNome("Conta para movimentacoes")); 
 		//mov.setUsuario_id('usuario_id);
 		mov.setDescricao("Descrição da movimentação");
 		mov.setEnvolvido("Envolvido da movimentaoção");
