@@ -32,10 +32,10 @@ public class BarrigaTest extends BaseTest {
 	@BeforeClass
 	public static void login() {
 		Map<String, String> login = new HashMap<String, String>();
-//		login.put("email", "rafaeltorress@gmail.com");
-//		login.put("senha", "123");
-		login.put("email", "kelly.rabelo@gmail.com");
-		login.put("senha", "momota01");
+		login.put("email", "rafael@gmail.com");
+		login.put("senha", "123456");
+//		login.put("email", "kelly.rabelo@gmail.com");
+//		login.put("senha", "momota01");
 		
 		String TOKEN = given()
 			.body(login)			
