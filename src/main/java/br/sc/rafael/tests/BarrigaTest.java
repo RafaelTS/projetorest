@@ -32,10 +32,10 @@ public class BarrigaTest extends BaseTest {
 	@BeforeClass
 	public static void login() {
 		Map<String, String> login = new HashMap<String, String>();
+//		login.put("email", "rafaeltorress@gmail.com");
+//		login.put("senha", "123");
 		login.put("email", "rafael@gmail.com");
 		login.put("senha", "123456");
-//		login.put("email", "kelly.rabelo@gmail.com");
-//		login.put("senha", "momota01");
 		
 		String TOKEN = given()
 			.body(login)			
@@ -53,7 +53,7 @@ public class BarrigaTest extends BaseTest {
 	public void t02_deveIncluirContaComSucesso() {
 		CONTA_ID = given()
 			.contentType(ContentType.JSON)
-			.body("{ \"nome\": \"conta qualquer12341\"}")
+			.body("{ \"nome\": \"conta qualquer1232412\"}")
 			
 		.when()
 			.post("/contas")
