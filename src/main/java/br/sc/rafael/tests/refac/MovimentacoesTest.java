@@ -18,56 +18,57 @@ public class MovimentacoesTest extends BaseTest {
 	@Test
 	public void deveInserirMovimentacaoComSucesso() {
 		Movimentacao mov = getMovimentacaoValida();
-		
+
 		given()
-			.body(mov)
-		.when()
-			.post("/transacoes")
-		.then()
-			.statusCode(201)
-			.body("descricao", is("Descrição da movimentação"))
-			.body("envolvido", is("Envolvido da movimentaoção"))
-			.body("tipo", is("REC"))
-			.body("valor", is("100.00"))
-			.body("status", is(true))
+				.body(mov)
+				.when()
+				.post("/transacoes")
+				.then()
+				.statusCode(201)
+				.body("descricao", is("DescriÃ§Ã£o da movimentaÃ§Ã£o"))
+				.body("envolvido", is("Envolvido da movimentaoÃ§Ã£o"))
+				.body("tipo", is("REC"))
+				.body("valor", is("100.00"))
+				.body("status", is(true))
 		;
 	}
-	
+
 	@Test
 	public void deveValidarCamposObrigatoriosMovimentacao() {
-		
+
 		given()
-			.body("{}")
-		.when()
-			.post("/transacoes")
-		.then()
-			.statusCode(400)
-			.body("$", hasSize(8))
-			.body("msg", hasItems(
-					"Data da Movimentação é obrigatório",
-					"Data do pagamento é obrigatório",
-					"Descrição é obrigatório",
-					"Interessado é obrigatório",
-					"Valor é obrigatório",
-					"Valor deve ser um número",
-					"Situação é obrigatório"))
+				.body("{}")
+				.when()
+				.post("/transacoes")
+				.then()
+				.statusCode(400)
+				.body("$", hasSize(8))
+				.body("msg", hasItems(
+						"Data da MovimentaÃ§Ã£o Ã© obrigatÃ³rio",
+						"Data do pagamento Ã© obrigatÃ³rio",
+						"DescriÃ§Ã£o Ã© obrigatÃ³rio",
+						"Interessado Ã© obrigatÃ³rio",
+						"Valor Ã© obrigatÃ³rio",
+						"Valor deve ser um nÃºmero",
+						"SituaÃ§Ã£o Ã© obrigatÃ³rio"))
 		;
 	}
-	
+
 	@Test
 	public void naoDeveCadastrarMovimentacaoFutura() {
 		Movimentacao mov = getMovimentacaoValida();
 		mov.setData_transacao(DateUtils.getDataDiferencaDias(2));
-		
+
 		given()
 			.body(mov)
 		.when()
 			.post("/transacoes")
 		.then()
 			.statusCode(400)
-			.body("msg", hasItem("Data da Movimentação deve ser menor ou igual à data atual"))
+			.body("msg", hasItem("Data da MovimentaÃ§Ã£o deve ser menor ou igual Ã  data atual"))
 		;
 	}
+
 	
 	@Test
 	public void naoDeveRemoverContaComMovimentacao() {
@@ -85,7 +86,7 @@ public class MovimentacoesTest extends BaseTest {
 	
 	@Test
 	public void deveDeletarMovimentacao() {
-		Integer MOV_ID = BarrigaUtils.getIdMovimentacaoPeloNome("Movimentacao para exclusão");
+		Integer MOV_ID = BarrigaUtils.getIdMovimentacaoPeloNome("Movimentacao para exclusï¿½o");
 		
 		given()
 			.pathParam("id", MOV_ID)
@@ -95,13 +96,13 @@ public class MovimentacoesTest extends BaseTest {
 			.statusCode(204)
 		;
 	}
-	
+
 	private Movimentacao getMovimentacaoValida() {
 		Movimentacao mov = new Movimentacao();
-		mov.setConta_id(BarrigaUtils.getIdContaPeloNome("Conta para movimentacoes")); 
+		mov.setConta_id(BarrigaUtils.getIdContaPeloNome("Conta para movimentacoes"));
 		//mov.setUsuario_id('usuario_id);
-		mov.setDescricao("Descrição da movimentação");
-		mov.setEnvolvido("Envolvido da movimentaoção");
+		mov.setDescricao("DescriÃ§Ã£o da movimentaÃ§Ã£o");
+		mov.setEnvolvido("Envolvido da movimentaoÃ§Ã£o");
 		mov.setTipo("REC");
 		mov.setData_transacao(DateUtils.getDataDiferencaDias(-1));
 		mov.setData_pagamento(DateUtils.getDataDiferencaDias(5));
@@ -109,4 +110,6 @@ public class MovimentacoesTest extends BaseTest {
 		mov.setStatus(true);
 		return mov;
 	}
+	
+
 }

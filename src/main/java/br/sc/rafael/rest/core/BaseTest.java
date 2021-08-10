@@ -1,11 +1,14 @@
 package br.sc.rafael.rest.core;
 
+import io.restassured.parsing.Parser;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+
+import static io.restassured.RestAssured.defaultParser;
 
 public class BaseTest implements Constantes {
 	
@@ -18,11 +21,14 @@ public class BaseTest implements Constantes {
 		RequestSpecBuilder reqBuilder = new RequestSpecBuilder();
 		reqBuilder.setContentType(APP_CONTENT_TYPE);
 		RestAssured.requestSpecification = reqBuilder.build();
-		
+
+
+
 		ResponseSpecBuilder resBuilder = new ResponseSpecBuilder();
 		resBuilder.expectResponseTime(Matchers.lessThan(MAX_TIMEOUT));
+		//resBuilder.setDefaultParser(defaultParser);
 		RestAssured.responseSpecification = resBuilder.build();
-		
+
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 		
 	}

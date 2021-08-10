@@ -7,25 +7,25 @@ import static org.hamcrest.Matchers.is;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.restassured.http.ContentType;
 import org.junit.Test;
 
 import br.sc.rafael.rest.core.BaseTest;
 
 public class ContasTest extends BaseTest {
-	
-	
+
 	@Test
 	public void deveIncluirContaComSucesso() {
 		Map<String, String> contaInserida = new HashMap<String, String>();
 		contaInserida.put("nome", "Conta inserida");
 		given()
 			.body(contaInserida)
-		//	.body("{ \"nome\": \"Conta inserida\"}")
+				.contentType(ContentType.JSON)
 		.when()
 			.post("/contas")
 		.then()
 			.statusCode(201)
-		;		
+		;
 	}
 	
 	@Test
@@ -42,7 +42,6 @@ public class ContasTest extends BaseTest {
 			.body("nome", is("Conta alterada"))
 		;
 	}
-	
 
 	@Test
 	public void naoDeveInserirContaComMesmoNome() {
@@ -52,8 +51,8 @@ public class ContasTest extends BaseTest {
 			.post("/contas")
 		.then()
 			.statusCode(400)
-			.body("error", is("Já existe uma conta com esse nome!"))
+		.body("error", is("JÃ¡ existe uma conta com esse nome!"))
 		;
 	}
-	
+
 }
