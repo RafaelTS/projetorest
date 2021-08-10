@@ -20,9 +20,9 @@ import io.restassured.RestAssured;
 @RunWith(Suite.class)
 @SuiteClasses({
 	ContasTest.class,
-	MovimentacoesTest.class,
-	SaldoTest.class,
-	AuthTest.class
+//	MovimentacoesTest.class,
+//	SaldoTest.class,
+//	AuthTest.class
 	
 })
 public class Suits extends BaseTest{

@@ -1,10 +1,7 @@
 package br.sc.rafael.tests;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,10 +29,10 @@ public class BarrigaTest extends BaseTest {
 	@BeforeClass
 	public static void login() {
 		Map<String, String> login = new HashMap<String, String>();
-//		login.put("email", "rafaeltorress@gmail.com");
-//		login.put("senha", "123");
-		login.put("email", "rafael@gmail.com");
-		login.put("senha", "123456");
+		login.put("email", "rafaeltorress@gmail.com");
+		login.put("senha", "123");
+//		login.put("email", "rafael@gmail.com");
+//		login.put("senha", "123456");
 		
 		String TOKEN = given()
 			.body(login)			
@@ -53,7 +50,7 @@ public class BarrigaTest extends BaseTest {
 	public void t02_deveIncluirContaComSucesso() {
 		CONTA_ID = given()
 			.contentType(ContentType.JSON)
-			.body("{ \"nome\": \"conta qualquer1232412\"}")
+			.body("{ \"nome\": \"conta qualquer12323412\"}")
 			
 		.when()
 			.post("/contas")
@@ -80,12 +77,13 @@ public class BarrigaTest extends BaseTest {
 	@Test
 	public void t04_naoDeveInserirContaComMesmoNome() {
 		given()
-			.body("{ \"nome\": \"" + CONTA_NAME +" alterada\"}")
+			//.body("{ \"nome\": \"" + CONTA_NAME +" alterada\"}")
+			.body("{ \"nome\": \"Conta alterada\"}")
 		.when()
 			.post("/contas")
 		.then()
 			.statusCode(400)
-			.body("error", is("Já existe uma conta com esse nome"))
+			.body("error", is("Já existe uma conta com esse nome!"))
 		;
 	}
 	
