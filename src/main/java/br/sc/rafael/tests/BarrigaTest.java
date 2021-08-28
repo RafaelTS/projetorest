@@ -32,7 +32,14 @@ public class BarrigaTest extends BaseTest {
 		login.put("email", "rafaeltorress@gmail.com");
 		login.put("senha", "123");
 
-		String TOKEN = given().body(login).when().post("/signin").then().statusCode(200).extract().path("token");
+		String TOKEN = given()
+							.body(login)
+						.when()
+							.post("/signin")
+						.then()
+							.statusCode(200)
+							.extract()
+							.path("token");
 		;
 
 		RestAssured.requestSpecification.header("Authorization", "JWT " + TOKEN);
@@ -66,13 +73,13 @@ public class BarrigaTest extends BaseTest {
 	@Test
 	public void t04_naoDeveInserirContaComMesmoNome() {
 		given()
-				// .body("{ \"nome\": \"" + CONTA_NAME +" alterada\"}")
-				.body("{ \"nome\": \"Conta alterada\"}")
-				.when()
-				.post("/contas")
+		// .body("{ \"nome\": \"" + CONTA_NAME +" alterada\"}")
+			.body("{ \"nome\": \"Conta alterada\"}")
+		.when()
+			.post("/contas")
 				.then()
-				.statusCode(400)
-				.body("error", is("Já existe uma conta com esse nome!"));
+			.statusCode(400)
+			.body("error", is("Já existe uma conta com esse nome!"));
 	}
 
 
@@ -108,13 +115,13 @@ public class BarrigaTest extends BaseTest {
 		mov.setData_transacao(DateUtils.getDataDiferencaDias(2));
 
 		given()
-				.body(mov)
-				.when()
-				.post("/transacoes")
-				.then()
-				.statusCode(400)
-				.body("$", hasSize(1))
-				.body("msg", hasItem("Data da Movimentação deve ser menor ou igual à data atual"))
+			.body(mov)
+		.when()
+			.post("/transacoes")
+		.then()
+			.statusCode(400)
+			.body("$", hasSize(1))
+			.body("msg", hasItem("Data da Movimentação deve ser menor ou igual à data atual"))
 		;
 	}
 
