@@ -44,13 +44,13 @@ public class MovimentacoesTest extends BaseTest {
 				.statusCode(400)
 				.body("$", hasSize(8))
 				.body("msg", hasItems(
-						"Data da MovimentaÃ§Ã£o Ã© obrigatÃ³rio",
-						"Data do pagamento Ã© obrigatÃ³rio",
-						"DescriÃ§Ã£o Ã© obrigatÃ³rio",
-						"Interessado Ã© obrigatÃ³rio",
-						"Valor Ã© obrigatÃ³rio",
-						"Valor deve ser um nÃºmero",
-						"SituaÃ§Ã£o Ã© obrigatÃ³rio"))
+						"Data da Movimentação é obrigatório",
+						"Data do pagamento é obrigatório",
+						"Descrição é obrigatório",
+						"Interessado é obrigatório",
+						"Valor é obrigatório",
+						"Valor deve ser um número",
+						"Situação é obrigatório"))
 		;
 	}
 
@@ -65,7 +65,7 @@ public class MovimentacoesTest extends BaseTest {
 			.post("/transacoes")
 		.then()
 			.statusCode(400)
-			.body("msg", hasItem("Data da MovimentaÃ§Ã£o deve ser menor ou igual Ã  data atual"))
+			.body("msg", hasItem("Data da Movimentação deve ser menor ou igual à data atual"))
 		;
 	}
 
@@ -101,8 +101,8 @@ public class MovimentacoesTest extends BaseTest {
 		Movimentacao mov = new Movimentacao();
 		mov.setConta_id(BarrigaUtils.getIdContaPeloNome("Conta para movimentacoes"));
 		//mov.setUsuario_id('usuario_id);
-		mov.setDescricao("DescriÃ§Ã£o da movimentaÃ§Ã£o");
-		mov.setEnvolvido("Envolvido da movimentaoÃ§Ã£o");
+		mov.setDescricao("Descrição da movimentação");
+		mov.setEnvolvido("Envolvido da movimentaoção");
 		mov.setTipo("REC");
 		mov.setData_transacao(DateUtils.getDataDiferencaDias(-1));
 		mov.setData_pagamento(DateUtils.getDataDiferencaDias(5));
