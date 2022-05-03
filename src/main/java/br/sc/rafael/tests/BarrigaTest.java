@@ -1,7 +1,14 @@
 package br.sc.rafael.tests;
 
 import static io.restassured.RestAssured.given;
+<<<<<<< HEAD
 import static org.hamcrest.Matchers.*;
+=======
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+>>>>>>> 6e7fcdbae90e587bfd5c2a2b46aa48dfc50ba49a
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +37,14 @@ public class BarrigaTest extends BaseTest {
 		login.put("email", "rafaeltorress@gmail.com");
 		login.put("senha", "123");
 
-		String TOKEN = given().body(login).when().post("/signin").then().statusCode(200).extract().path("token");
+		String TOKEN = given()
+							.body(login)
+						.when()
+							.post("/signin")
+						.then()
+							.statusCode(200)
+							.extract()
+							.path("token");
 		;
 
 		RestAssured.requestSpecification.header("Authorization", "JWT " + TOKEN);
@@ -64,13 +78,12 @@ public class BarrigaTest extends BaseTest {
 	@Test
 	public void t04_naoDeveInserirContaComMesmoNome() {
 		given()
-				// .body("{ \"nome\": \"" + CONTA_NAME +" alterada\"}")
-				.body("{ \"nome\": \"Conta alterada\"}")
-				.when()
-				.post("/contas")
+			.body("{ \"nome\": \"" + CONTA_NAME + " alterada\"}")
+		.when()
+			.post("/contas")
 				.then()
-				.statusCode(400)
-				.body("error", is("JÃ¡ existe uma conta com esse nome!"));
+			.statusCode(400)
+			.body("error", is("Já existe uma conta com esse nome!"));
 	}
 
 
@@ -97,6 +110,7 @@ public class BarrigaTest extends BaseTest {
 			.statusCode(400)
 		.body("$", hasSize(8))
 		.body("msg", hasItems(
+<<<<<<< HEAD
 						"Data da MovimentaÃ§Ã£o Ã© obrigatÃ³rio",
 						"Data do pagamento Ã© obrigatÃ³rio",
 						"DescriÃ§Ã£o Ã© obrigatÃ³rio",
@@ -104,22 +118,30 @@ public class BarrigaTest extends BaseTest {
 						"Valor Ã© obrigatÃ³rio",
 						"Valor deve ser um nÃºmero",
 						"SituaÃ§Ã£o Ã© obrigatÃ³rio"))
+=======
+				"Data da Movimentação é obrigatório",
+				"Data do pagamento é obrigatório",
+				"Descrição é obrigatório",
+				"Interessado é obrigatório",
+				"Valor é obrigatório",
+				"Valor deve ser um número",
+				"Situação é obrigatório"))
+>>>>>>> 6e7fcdbae90e587bfd5c2a2b46aa48dfc50ba49a
 		;
 	}
-
 	@Test
 	public void t07_naoDeveCadastrarMovimentacaoFutura() {
 		Movimentacao mov = getMovimentacaoValida();
 		mov.setData_transacao(DateUtils.getDataDiferencaDias(2));
 
 		given()
-				.body(mov)
-				.when()
-				.post("/transacoes")
-				.then()
-				.statusCode(400)
-				.body("$", hasSize(1))
-				.body("msg", hasItem("Data da MovimentaÃ§Ã£o deve ser menor ou igual Ã  data atual"))
+			.body(mov)
+		.when()
+			.post("/transacoes")
+		.then()
+			.statusCode(400)
+			.body("$", hasSize(1))
+			.body("msg", hasItem("Data da Movimentação deve ser menor ou igual à data atual"))
 		;
 	}
 
@@ -131,7 +153,7 @@ public class BarrigaTest extends BaseTest {
 			.delete("/contas/{id}")
 		.then()
 			.statusCode(500)
-		.body("constraint", is("transacoes_conta_id_foreign"));
+			.body("constraint", is("transacoes_conta_id_foreign"));
 	}
 
 	@Test
@@ -140,8 +162,9 @@ public class BarrigaTest extends BaseTest {
 		.when()
 			.get("/saldo")
 		.then()
-			.statusCode(200);
-	//	.body("find{it.conta_id == " + CONTA_ID + "}.saldo", is(100.00));
+			.statusCode(200)
+			.body("find{it.conta_id == " + CONTA_ID + "}.saldo", is("100.00"))
+			;
 	}
 
 	@Test
@@ -168,8 +191,8 @@ public class BarrigaTest extends BaseTest {
 	private Movimentacao getMovimentacaoValida() {
 		Movimentacao mov = new Movimentacao();
 		mov.setConta_id(CONTA_ID);
-		mov.setDescricao("DescriÃ§Ã£o da movimentaÃ§Ã£o");
-		mov.setEnvolvido("Envolvido da movimentaÃ§Ã£o");
+		mov.setDescricao("Descrição da movimentação");
+		mov.setEnvolvido("Envolvido da movimentação");
 		mov.setTipo("REC");
 		mov.setData_transacao(DateUtils.getDataDiferencaDias(-1));
 		mov.setData_pagamento(DateUtils.getDataDiferencaDias(5));
