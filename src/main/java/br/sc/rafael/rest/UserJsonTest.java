@@ -80,7 +80,7 @@ public class UserJsonTest {
 			.body("filhos.name", hasItems("Zezinho", "Luizinho"))
 		;
 	}
-	
+
 	@Test
 	public void deveRetornarUsuarioInexistente() {
 
@@ -89,7 +89,7 @@ public class UserJsonTest {
 			.get("http://restapi.wcaquino.me/users/4")
 		.then()
 			.statusCode(404)
-			.body("error", is("Usuário Inexistente"))
+			.body("error", is("Usuï¿½rio Inexistente"))
 		;
 	}
 	
@@ -103,7 +103,7 @@ public class UserJsonTest {
 		.then()
 			.statusCode(200)
 			.body("$", hasSize(3))
-			.body("name", hasItems("João da Silva","Maria Joaquina","Ana Júlia"))
+			.body("name", hasItems("JoÃ£o da Silva","Maria Joaquina","Ana JÃºlia"))
 			.body("age[1]", is(25))
 			.body("filhos.name", hasItem(Arrays.asList("Zezinho", "Luizinho")))
 			.body("salary", contains(1234.5678f, 2500, null))

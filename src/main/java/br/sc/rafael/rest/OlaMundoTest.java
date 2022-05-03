@@ -18,8 +18,7 @@ import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
 public class OlaMundoTest {
-	
-	
+
 	@Test
 	public void testOlaMundo() {
 		Response request = RestAssured.request(Method.GET, ("http://restapi.wcaquino.me/olamundo"));
@@ -55,9 +54,6 @@ public class OlaMundoTest {
 			.body(is("Ola Mundo!"))
 			.body(containsString("Mundo"))
 			.body(is(not(nullValue())));
-					
-		
-			
-	}
 
+	}
 }

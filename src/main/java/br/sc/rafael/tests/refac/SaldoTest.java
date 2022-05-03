@@ -11,7 +11,7 @@ import br.sc.rafael.rest.utils.BarrigaUtils;
 public class SaldoTest extends BaseTest {
 	
 	@Test
-	public void deveCalcularSaldoConta() {
+	public void deveCalcularSaldoConta(){
 		Integer CONTA_ID = BarrigaUtils.getIdContaPeloNome("Conta para saldo");
 		
 		given()

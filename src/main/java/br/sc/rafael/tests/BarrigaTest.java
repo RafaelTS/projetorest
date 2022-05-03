@@ -1,9 +1,7 @@
 package br.sc.rafael.tests;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -98,7 +96,14 @@ public class BarrigaTest extends BaseTest {
 		.then()
 			.statusCode(400)
 		.body("$", hasSize(8))
-//			.body("msg", hasItems("rodar o post e copiar as mensgens"))
+		.body("msg", hasItems(
+						"Data da Movimentação é obrigatório",
+						"Data do pagamento é obrigatório",
+						"Descrição é obrigatório",
+						"Interessado é obrigatório",
+						"Valor é obrigatório",
+						"Valor deve ser um número",
+						"Situação é obrigatório"))
 		;
 	}
 
@@ -172,5 +177,7 @@ public class BarrigaTest extends BaseTest {
 		mov.setStatus(true);
 		return mov;
 	}
+
+
 
 }
