@@ -13,7 +13,7 @@ import br.sc.rafael.rest.utils.BarrigaUtils;
 import br.sc.rafael.rest.utils.DateUtils;
 import br.sc.rafael.tests.Movimentacao;
 
-public class 	MovimentacoesTest extends BaseTest {
+public class MovimentacoesTest extends BaseTest {
 	
 	@Test
 	public void deveInserirMovimentacaoComSucesso() {
@@ -43,13 +43,15 @@ public class 	MovimentacoesTest extends BaseTest {
 				.then()
 				.statusCode(400)
 				.body("$", hasSize(8))
+//				.body("param", )
 				.body("msg", hasItems(
 						"Data da Movimentação é obrigatório",
-						"Data do pagamento do obrigatório",
+						"Data do pagamento é obrigatório",
 						"Descrição é obrigatório",
 						"Interessado é obrigatório",
 						"Valor é obrigatório",
 						"Valor deve ser um número",
+						"Conta é obrigatório",
 						"Situação é obrigatório"))
 		;
 	}

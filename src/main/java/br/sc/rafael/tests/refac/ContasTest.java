@@ -51,7 +51,7 @@ public class ContasTest extends BaseTest {
 			.post("/contas")
 		.then()
 			.statusCode(400)
-		.body("error", is("Já existe uma conta com esse nome!"))
+		.body("error", is("JÃ¡ existe uma conta com esse nome!"))
 		;
 	}
 

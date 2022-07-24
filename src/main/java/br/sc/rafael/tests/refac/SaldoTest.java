@@ -3,6 +3,8 @@ package br.sc.rafael.tests.refac;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
+import io.restassured.RestAssured;
+import io.restassured.parsing.Parser;
 import org.junit.Test;
 
 import br.sc.rafael.rest.core.BaseTest;
@@ -12,6 +14,8 @@ public class SaldoTest extends BaseTest {
 	
 	@Test
 	public void deveCalcularSaldoConta(){
+
+		RestAssured.defaultParser = Parser.JSON;
 		Integer CONTA_ID = BarrigaUtils.getIdContaPeloNome("Conta para saldo");
 		
 		given()

@@ -59,9 +59,9 @@ public class UserJsonTest {
 			.get("http://restapi.wcaquino.me/users/2")
 		.then()
 			.statusCode(200)
-			.body("id", is(1))
+			.body("id", is(2))
 			.body("name", containsString("Joaquina"))
-			.body("endereco.rua", is("Rua dos Bobos"))
+			.body("endereco.rua", is("Rua dos bobos"))
 		;
 	}
 	
@@ -89,7 +89,7 @@ public class UserJsonTest {
 			.get("http://restapi.wcaquino.me/users/4")
 		.then()
 			.statusCode(404)
-			.body("error", is("Usu�rio Inexistente"))
+			.body("error", is("Usuário inexistente"))
 		;
 	}
 	
@@ -121,26 +121,9 @@ public class UserJsonTest {
 			.statusCode(200)
 			.body("$", hasSize(3))
 			.body("age.findAll{it <= 25}.size()", is(2))
-			.body("age.findAll{it <= 25}.size() && it > 20", is(1))
 			.body("findAll{it.age <= 25 && it.age > 20}.name", hasItem("Maria Joaquina"))
 
-			
 		;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
