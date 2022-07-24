@@ -79,7 +79,7 @@ public class BarrigaTest extends BaseTest {
 			.post("/contas")
 				.then()
 			.statusCode(400)
-			.body("error", is("J� existe uma conta com esse nome!"));
+			.body("error", is("Já existe uma conta com esse nome!"));
 	}
 
 
