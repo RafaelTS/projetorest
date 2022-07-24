@@ -1,14 +1,10 @@
 package br.sc.rafael.tests;
 
 import static io.restassured.RestAssured.given;
-<<<<<<< HEAD
-import static org.hamcrest.Matchers.*;
-=======
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
->>>>>>> 6e7fcdbae90e587bfd5c2a2b46aa48dfc50ba49a
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,7 +79,7 @@ public class BarrigaTest extends BaseTest {
 			.post("/contas")
 				.then()
 			.statusCode(400)
-			.body("error", is("Já existe uma conta com esse nome!"));
+			.body("error", is("Jï¿½ existe uma conta com esse nome!"));
 	}
 
 
@@ -110,7 +106,7 @@ public class BarrigaTest extends BaseTest {
 			.statusCode(400)
 		.body("$", hasSize(8))
 		.body("msg", hasItems(
-<<<<<<< HEAD
+
 						"Data da MovimentaÃ§Ã£o Ã© obrigatÃ³rio",
 						"Data do pagamento Ã© obrigatÃ³rio",
 						"DescriÃ§Ã£o Ã© obrigatÃ³rio",
@@ -118,15 +114,6 @@ public class BarrigaTest extends BaseTest {
 						"Valor Ã© obrigatÃ³rio",
 						"Valor deve ser um nÃºmero",
 						"SituaÃ§Ã£o Ã© obrigatÃ³rio"))
-=======
-				"Data da Movimentação é obrigatório",
-				"Data do pagamento é obrigatório",
-				"Descrição é obrigatório",
-				"Interessado é obrigatório",
-				"Valor é obrigatório",
-				"Valor deve ser um número",
-				"Situação é obrigatório"))
->>>>>>> 6e7fcdbae90e587bfd5c2a2b46aa48dfc50ba49a
 		;
 	}
 	@Test
@@ -141,7 +128,7 @@ public class BarrigaTest extends BaseTest {
 		.then()
 			.statusCode(400)
 			.body("$", hasSize(1))
-			.body("msg", hasItem("Data da Movimentação deve ser menor ou igual à data atual"))
+			.body("msg", hasItem("Data da MovimentaÃ§Ã£o deve ser menor ou igual Ã  data atual"))
 		;
 	}
 
@@ -191,8 +178,8 @@ public class BarrigaTest extends BaseTest {
 	private Movimentacao getMovimentacaoValida() {
 		Movimentacao mov = new Movimentacao();
 		mov.setConta_id(CONTA_ID);
-		mov.setDescricao("Descrição da movimentação");
-		mov.setEnvolvido("Envolvido da movimentação");
+		mov.setDescricao("DescriÃ§Ã£o da movimentaÃ§Ã£o");
+		mov.setEnvolvido("Envolvido da movimentaÃ§Ã£o");
 		mov.setTipo("REC");
 		mov.setData_transacao(DateUtils.getDataDiferencaDias(-1));
 		mov.setData_pagamento(DateUtils.getDataDiferencaDias(5));
@@ -200,7 +187,5 @@ public class BarrigaTest extends BaseTest {
 		mov.setStatus(true);
 		return mov;
 	}
-
-
 
 }

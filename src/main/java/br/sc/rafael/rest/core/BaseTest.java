@@ -26,7 +26,6 @@ public class BaseTest implements Constantes {
 
 		ResponseSpecBuilder resBuilder = new ResponseSpecBuilder();
 		resBuilder.expectResponseTime(Matchers.lessThan(MAX_TIMEOUT));
-		//resBuilder.setDefaultParser(defaultParser);
 		RestAssured.responseSpecification = resBuilder.build();
 
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();

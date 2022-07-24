@@ -13,7 +13,7 @@ import br.sc.rafael.rest.utils.BarrigaUtils;
 import br.sc.rafael.rest.utils.DateUtils;
 import br.sc.rafael.tests.Movimentacao;
 
-public class MovimentacoesTest extends BaseTest {
+public class 	MovimentacoesTest extends BaseTest {
 	
 	@Test
 	public void deveInserirMovimentacaoComSucesso() {
@@ -26,7 +26,7 @@ public class MovimentacoesTest extends BaseTest {
 				.then()
 				.statusCode(201)
 				.body("descricao", is("Descri√ß√£o da movimenta√ß√£o"))
-				.body("envolvido", is("Envolvido da movimentao√ß√£o"))
+				.body("envolvido", is("Envolvido da movimenta√ß√£o"))
 				.body("tipo", is("REC"))
 				.body("valor", is("100.00"))
 				.body("status", is(true))
@@ -44,13 +44,13 @@ public class MovimentacoesTest extends BaseTest {
 				.statusCode(400)
 				.body("$", hasSize(8))
 				.body("msg", hasItems(
-						"Data da MovimentaÁ„o È obrigatÛrio",
-						"Data do pagamento È obrigatÛrio",
-						"DescriÁ„o È obrigatÛrio",
-						"Interessado È obrigatÛrio",
-						"Valor È obrigatÛrio",
-						"Valor deve ser um n˙mero",
-						"SituaÁ„o È obrigatÛrio"))
+						"Data da Movimenta√ß√£o √© obrigat√≥rio",
+						"Data do pagamento do obrigat√≥rio",
+						"Descri√ß√£o √© obrigat√≥rio",
+						"Interessado √© obrigat√≥rio",
+						"Valor √© obrigat√≥rio",
+						"Valor deve ser um n√∫mero",
+						"Situa√ß√£o √© obrigat√≥rio"))
 		;
 	}
 
@@ -65,7 +65,7 @@ public class MovimentacoesTest extends BaseTest {
 			.post("/transacoes")
 		.then()
 			.statusCode(400)
-			.body("msg", hasItem("Data da MovimentaÁ„o deve ser menor ou igual ‡ data atual"))
+			.body("msg", hasItem("Data da Movimenta√ß√£o deve ser menor ou igual √† data atual"))
 		;
 	}
 
@@ -86,7 +86,7 @@ public class MovimentacoesTest extends BaseTest {
 	
 	@Test
 	public void deveDeletarMovimentacao() {
-		Integer MOV_ID = BarrigaUtils.getIdMovimentacaoPeloNome("Movimentacao para exclusÔøΩo");
+		Integer MOV_ID = BarrigaUtils.getIdMovimentacaoPeloNome("Movimentacao para exclus√£o");
 		
 		given()
 			.pathParam("id", MOV_ID)
@@ -101,8 +101,8 @@ public class MovimentacoesTest extends BaseTest {
 		Movimentacao mov = new Movimentacao();
 		mov.setConta_id(BarrigaUtils.getIdContaPeloNome("Conta para movimentacoes"));
 		//mov.setUsuario_id('usuario_id);
-		mov.setDescricao("DescriÁ„o da movimentaÁ„o");
-		mov.setEnvolvido("Envolvido da movimentaoÁ„o");
+		mov.setDescricao("Descri√ß√£o da movimenta√ß√£o");
+		mov.setEnvolvido("Envolvido da movimenta√ß√£o");
 		mov.setTipo("REC");
 		mov.setData_transacao(DateUtils.getDataDiferencaDias(-1));
 		mov.setData_pagamento(DateUtils.getDataDiferencaDias(5));
